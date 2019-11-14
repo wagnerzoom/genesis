@@ -12,7 +12,7 @@ public class PessoaRepositorioTeste {
     public static void main(String[] args) {
 
         PessoaRepositorio pessoaRepositorio = new PessoaRepositorio();
-        salvar(pessoaRepositorio);
+        alterar(pessoaRepositorio);
     }
 
     private static void excluir(PessoaRepositorio pessoaRepositorio) {
@@ -21,7 +21,7 @@ public class PessoaRepositorioTeste {
     }
 
     private static void alterar(PessoaRepositorio pessoaRepositorio) {
-        Pessoa pessoa = pessoaRepositorio.buscarPorId(2);
+        Pessoa pessoa = pessoaRepositorio.buscarPorId(10);
         if (pessoa != null) {
             pessoa.setId(2);
             pessoa.setNome("Eudes Batista");

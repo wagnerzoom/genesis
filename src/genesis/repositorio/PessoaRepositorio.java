@@ -82,14 +82,14 @@ public class PessoaRepositorio implements PadraoRepositorio<Pessoa> {
         if (!bancoConexao.conectarBanco()) {
             return this.pessoas;
         }
-        bancoConexao.execultarSql("select * from pessoa where nome like '%" + pesquisa + "%' or documento='" + pesquisa + "'");
+        bancoConexao.execultarSql("select * from pessoa where upper(nome) like '%" + pesquisa.toUpperCase() + "%' or documento='" + pesquisa + "' or fone='" + pesquisa+"'" );
         try {
             bancoConexao.getResultSet().first();
             do {
                 Pessoa pessoa = new Pessoa();
                 pessoa.setId(bancoConexao.getResultSet().getInt("id"));
                 pessoa.setDocumento(bancoConexao.getResultSet().getString("documento"));
-                pessoa.setNome(bancoConexao.getResultSet().getString("nome"));
+                pessoa.setNome(bancoConexao.getResultSet().getString("nome").toUpperCase());
                 pessoa.setFone(bancoConexao.getResultSet().getString("fone"));
 
                 this.pessoas.add(pessoa);
@@ -108,14 +108,14 @@ public class PessoaRepositorio implements PadraoRepositorio<Pessoa> {
         if (!bancoConexao.conectarBanco()) {
             return this.pessoas;
         }
-        bancoConexao.execultarSql("select * from pessoa");
+        bancoConexao.execultarSql("select * from pessoa order by nome");
         try {
             bancoConexao.getResultSet().first();
             do {
                 Pessoa pessoa = new Pessoa();
                 pessoa.setId(bancoConexao.getResultSet().getInt("id"));
                 pessoa.setDocumento(bancoConexao.getResultSet().getString("documento"));
-                pessoa.setNome(bancoConexao.getResultSet().getString("nome"));
+                pessoa.setNome(bancoConexao.getResultSet().getString("nome").toUpperCase());
                 pessoa.setFone(bancoConexao.getResultSet().getString("fone"));
 
                 this.pessoas.add(pessoa);
